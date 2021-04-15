@@ -55,6 +55,8 @@ function App() {
           return 'app warm'
         case (temp >= 80):
           return 'app hot'  
+        default:  
+          return 'app'
       }
     }
     return 'app'

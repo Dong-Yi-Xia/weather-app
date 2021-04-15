@@ -13,3 +13,20 @@ https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API<br>
 
 Unsplash Images<br>
 https://unsplash.com/<br>
+
+
+### Deploy on GitHub Page with React
+npm install gh-pages / npm add gh-pages<br>
+
+In package.json<br>
+"homepage": "https://username.github.io/repoName",<br>
+
+Inside the script tag add<br>
+"predeploy": "npm run build", or "predeploy": "yarn build",<br>
+"deploy": "gh-pages -d build"<br>
+
+In the terminal<br>
+npm run deploy / yarn deploy<br>
+Git add. Git commit. Git push<br>
+
+In github pages. Select gh-pages branch.<br>
