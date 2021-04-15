@@ -9,14 +9,22 @@ body {
 }
 
 .app {
-  background-image: url('./assets/sunny.jpg');
+  background-image: url('./assets/nature.jpg');
   background-size: cover;
-  background-position: bottom;
+  background-position: right;
   transition: 0.4s ease-out;
 }
 
-.app.cloud {
-  background-image: url('./assets/cloud.jpg');
+.app.cold {
+  background-image: url('./assets/cold.jpg');
+}
+
+.app.warm {
+  background-image: url('./assets/warm.jpg');
+}
+
+.app.hot {
+  background-image: url('./assets/hot.jpg');
 }
 
 main {
@@ -50,6 +58,10 @@ main {
 
   transition: 0.4s ease
 }
+
+.search-box .search-bar::placeholder {
+  font-size: 16px;
+} 
 
 .search-box .search-bar:focus {
   background-color: rgba(255,255,255,0.8);

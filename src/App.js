@@ -21,20 +21,6 @@ function App() {
   //   setWeather(data)
   // }, [])
 
-  // const search = (evt) => {
-  //   if(evt.key === 'Enter'){
-  //     fetch(`${api.base}weather?q=${query}&units=metric&appid=${api.key}`)
-  //       .then(res => res.json())
-  //       .then(result => {
-  //         setQuery('')
-  //         setWeather(result)
-  //         console.log(result)
-  //       })
-  //       .catch(err => {
-  //         console.log(err)
-  //       })
-  //   }
-  // }
   
 
   const search = async (evt) => {
@@ -47,21 +33,36 @@ function App() {
     }
   }
 
+  const weatherType = () => {
+    if(weather.main){
+      let temp = weather.main.temp
+      switch(true){
+        case (temp <= 45):
+          return 'app cold'
+        case (temp > 45 && temp < 80):
+          return 'app warm'
+        case (temp >= 80):
+          return 'app hot'  
+      }
+    }
+    return 'app'
+  }
+
   return (
-    <div className="app ">
+    <div className={weatherType()}>
         <main>
             <div className='search-box'>
                 <input 
                   type='text'
                   className='search-bar'
-                  placeholder='Search a city name...'
+                  placeholder='Search a city name, state, country......'
                   onChange={e => setQuery(e.target.value)}
                   value={query}
                   onKeyPress={search}
                 />
             </div>
-            {(typeof weather.main != 'undefined') ? (
-              <div>     
+            {(typeof weather.main != 'undefined') ? 
+            (<div>     
                 <div className='location-box'>
                     <div className='location'>{weather.name}, {weather.sys.country} </div>
                     <div className='date'>{dateBuilder2()}</div>
@@ -71,8 +72,8 @@ function App() {
                   <div className='temp'> {Math.round(weather.main.temp)}°F </div>
                   <div className='weather'> {weather.weather[0].main} </div>
                 </div>
-              </div>
-            ) : ('City Not Found')}
+            </div>) : 
+            ('CITY NOT FOUND')}
 
         </main>
     </div>
