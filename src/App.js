@@ -14,22 +14,34 @@ function App() {
   const [weather, setWeather] = useState({})
 
 
-  // useEffect( async() => {
-  //   let response = await fetch(`${api.base}weather?q=${query}&units=imperial&appid=${api.key}`)
-  //   let data = await response.json()
-  //   setQuery('')
-  //   setWeather(data)
-  // }, [])
+  let success = async (position) => {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+    let response = await fetch(`${api.base}weather?&lon=${lon}&lat=${lat}&units=imperial&appid=${api.key}`)
+    let data = await response.json()
+    setQuery('')
+    setWeather(data)
+  }
 
+  let error = () => {
+    console.log('Unable to get location, please turn on location')
+  }
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(success, error)
+  }, [])
   
 
   const search = async (evt) => {
-    if(evt.key === 'Enter'){
-      let response = await fetch(`${api.base}weather?q=${query}&units=imperial&appid=${api.key}`)
-      let data = await response.json()
-      setQuery('')
-      setWeather(data)
-      console.log(data)
+    if(evt.key === 'Enter' && query === ''){
+      navigator.geolocation.getCurrentPosition(success, error)
+    }
+    else if(evt.key === 'Enter'){
+        let response = await fetch(`${api.base}weather?q=${query}&units=imperial&appid=${api.key}`)
+        let data = await response.json()
+        setQuery('')
+        setWeather(data)
+        console.log(data)
     }
   }
 
@@ -73,7 +85,7 @@ function App() {
                   <div className='weather'> {weather.weather[0].main} </div>
                 </div>
             </div>) : 
-            ('CITY NOT FOUND')}
+            (<div className='not-found'> CITY NOT FOUND </div>)}
 
         </main>
     </div>
