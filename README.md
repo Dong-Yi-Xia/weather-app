@@ -30,3 +30,6 @@ npm run deploy / yarn deploy<br>
 Git add. Git commit. Git push<br>
 
 In github pages. Select gh-pages branch.<br>
+
+### install redux
+npm install redux redux-logger react-redux
